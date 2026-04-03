@@ -4,14 +4,20 @@ import com.itneo.pojo.Location;
 import com.itneo.pojo.Result;
 import com.itneo.service.LocationService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RequestMapping("/depts")
 @RestController
 public class LocationController {
+
+    // private static final Logger log = LoggerFactory.getLogger(LocationController.class);// 固定
 
     @Autowired
     private LocationService locationService;
@@ -22,7 +28,8 @@ public class LocationController {
     // @RequestMapping(value = "/locations", method = RequestMethod.GET)
     @GetMapping
     public Result list() {
-        System.out.println("查询所有地址数据");
+        // System.out.println("查询所有地址数据");
+        log.info("查询所有地址数据");
         List<Location> locationList = locationService.findAll();
         return Result.success(locationList);
     }
@@ -53,7 +60,8 @@ public class LocationController {
      */
     @DeleteMapping
     public Result delete(Integer id) {
-        System.out.println("根据ID删除地址：" + id);
+        // System.out.println("根据ID删除地址：" + id);
+        log.info("根据ID删除地址：{}", id);
         locationService.deleteById(id);
         return Result.success();
     }
@@ -63,7 +71,8 @@ public class LocationController {
      */
     @PostMapping
     public Result add(@RequestBody Location location) {
-        System.out.println("新增地址：" + location);
+        // System.out.println("新增地址：" + location);
+        log.info("新增地址：{}", location);
         locationService.add(location);
         return Result.success();
     }
@@ -82,7 +91,8 @@ public class LocationController {
      */
     @GetMapping("/{id}")
     public Result getInfo(@PathVariable Integer id) {
-        System.out.println("根据ID查询地址：" + id);
+        // System.out.println("根据ID查询地址：" + id);
+        log.info("根据ID查询地址：{}", id);
         Location location = locationService.getById(id);
         return Result.success(location);
     }
@@ -92,7 +102,8 @@ public class LocationController {
      */
     @PutMapping
     public Result update(@RequestBody Location location) {
-        System.out.println("修改地址：" + location);
+        // System.out.println("修改地址：" + location);
+        log.info("修改地址：{}", location);
         locationService.update(location);
         return Result.success();
     }

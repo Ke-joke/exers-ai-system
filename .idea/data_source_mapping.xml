@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/exer-web-management/src/main/java/com/itneo/mapper/ClazzMapper.java" value="56c8fb6e-1bca-4be3-b103-7fc833528834" />
     <file url="file://$PROJECT_DIR$/exer-web-management/src/main/java/com/itneo/mapper/LocationMapper.java" value="56c8fb6e-1bca-4be3-b103-7fc833528834" />
   </component>
 </project>
