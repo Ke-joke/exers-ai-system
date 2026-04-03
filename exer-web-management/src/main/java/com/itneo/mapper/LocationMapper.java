@@ -1,10 +1,7 @@
 package com.itneo.mapper;
 
 import com.itneo.pojo.Location;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -24,4 +21,28 @@ public interface LocationMapper {
     // @Select("SELECT id, name, create_time createTime, update_time updateTime FROM location order by update_time desc;")
     @Select("SELECT id, name, create_time, update_time FROM location order by update_time desc;")
     List<Location> findAll();
+
+    /**
+     * 根据id删除地址
+     */
+    @Delete("delete from location where id = #{id}")
+    void deleteById(Integer id);
+
+    /**
+     * 新增地址
+     */
+    @Insert("insert into location(name, create_time, update_time) values(#{name}, #{createTime}, #{updateTime})")
+    void insert(Location location);
+
+    /**
+     * 根据id查询地址
+     */
+    @Select("select id, name, create_time, update_time from location where id = #{id}")
+    Location getById(Integer id);
+
+    /**
+     * 修改地址
+     */
+    @Update("update location set name = #{name}, update_time = #{updateTime} where id = #{id}")
+    void update(Location location);
 }
