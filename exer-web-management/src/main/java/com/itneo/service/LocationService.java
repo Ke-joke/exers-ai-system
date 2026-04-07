@@ -1,6 +1,5 @@
 package com.itneo.service;
 
-import com.itneo.mapper.LocationMapper;
 import com.itneo.pojo.Location;
 
 import java.util.List;
