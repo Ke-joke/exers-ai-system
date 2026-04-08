@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -47,8 +48,8 @@ public class EmpServiceImpl implements EmpService {
 
     /**
      * PageHelper分页查询
-     * @param page 页码
-     * @param pageSize 每页记录数
+     //* @param page 页码
+     //* @param pageSize 每页记录数
      * 注意事项：
      *        1. 定义的SQL语句不能加分号;
      *        2. PageHelper仅仅能对紧跟在其后的第一个查询进行分页处理
@@ -103,5 +104,50 @@ public class EmpServiceImpl implements EmpService {
             EmpLog empLog = new EmpLog(null, LocalDateTime.now(), "新增员工:"+emp);
             empLogService.insertLog(empLog);
         }
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void deleteByIds(List<Integer> ids) {
+        //1. 批量删除员工基本信息
+        empMapper.deleteByIds(ids);
+
+        //2. 批量删除员工锻炼经历信息
+        empExprMapper.deleteByEmpIds(ids);
+
+    }
+
+    /**
+     * 获取员工信息
+     */
+    @Override
+    public Emp getInfo(Integer id) {
+        return empMapper.getInfo(id);
+    }
+
+    /**
+     * 修改员工信息
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void update(Emp emp) {
+        //1. 根据ID修改员工基本信息
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.updateById(emp);
+
+        //2. 根据ID修改员工锻炼经历信息
+        //2.1 先根据员工ID删除原有的锻炼经历
+        empExprMapper.deleteByEmpIds(Arrays.asList(emp.getId()));
+
+        //2.2 再添加这个员工新的锻炼经历
+        List<EmpExpr> exprList = emp.getExprList();
+        if(!CollectionUtils.isEmpty(exprList)) {
+            //遍历集合，为empId赋值
+            exprList.forEach(empExpr -> {
+                empExpr.setEmpId(emp.getId());
+            });
+            empExprMapper.insertBatch(exprList);
+        }
+
     }
 }

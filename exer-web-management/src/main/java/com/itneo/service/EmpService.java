@@ -5,6 +5,7 @@ import com.itneo.pojo.EmpQueryParam;
 import com.itneo.pojo.PageResult;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface EmpService {
 
@@ -17,6 +18,21 @@ public interface EmpService {
      * 新增员工
      */
     void save(Emp emp);
+
+    /**
+     * 批量删除员工 - 列表
+     */
+    void deleteByIds(List<Integer> ids);
+
+    /**
+     * 根据ID查询员工信息
+     */
+    Emp getInfo(Integer id);
+
+    /**
+     * 修改员工信息
+     */
+    void update(Emp emp);
 
     /**
      * 分页查询

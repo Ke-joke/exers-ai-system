@@ -3,12 +3,12 @@ package com.itneo.mapper;
 import com.itneo.pojo.Emp;
 import com.itneo.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 员工信息
@@ -47,4 +47,31 @@ public interface EmpMapper {
     @Insert("insert into emp(username, name, gender, phone, exer_type, burn_calorie, image, entry_date, location_id, create_time, update_time)" +
             "VALUES (#{username}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})")
     void insert(Emp emp);
+
+    /**
+     * 批量删除员工基本信息
+     */
+    void deleteByIds(List<Integer> ids);
+
+    /**
+     * 根据ID查询员工信息以及员工锻炼经历
+     */
+    Emp getInfo(Integer id);
+
+    /**
+     * 根据ID更新员工的基本信息
+     */
+    void updateById(Emp emp);
+
+    /**
+     * 统计员工锻炼方式的人数
+     */
+    @MapKey("pos")
+    List<Map<String, Object>> countEmpEmpTypeData();
+
+    /**
+     * 统计员工性别的人数
+     */
+    @MapKey("name")
+    List<Map<String, Object>> countEmpGenderData();
 }
