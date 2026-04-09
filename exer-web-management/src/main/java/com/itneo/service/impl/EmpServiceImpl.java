@@ -150,4 +150,9 @@ public class EmpServiceImpl implements EmpService {
         }
 
     }
+
+    @Override
+    public List<Emp> findAll() {
+        return empMapper.findAll();
+    }
 }

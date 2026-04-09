@@ -2,10 +2,7 @@ package com.itneo.mapper;
 
 import com.itneo.pojo.Emp;
 import com.itneo.pojo.EmpQueryParam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.MapKey;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -74,4 +71,11 @@ public interface EmpMapper {
      */
     @MapKey("name")
     List<Map<String, Object>> countEmpGenderData();
+
+    /**
+     * 查询所有员工信息
+     */
+    @Select("select id, username, password, name, gender, phone, exer_type job, burn_calorie salary, " +
+            "image, entry_date, location_id, create_time, update_time from emp")
+    List<Emp> findAll();
 }
