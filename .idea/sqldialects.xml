@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/exer-web-management/src/main/resources/com/itneo/mapper/ClazzMapper.xml" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/exer_console.sql" dialect="MariaDB" />
+    <file url="file://$USER_HOME$/_localhost-2026_04_07_21_06_21-dump.sql" dialect="MariaDB" />
+  </component>
+</project>
