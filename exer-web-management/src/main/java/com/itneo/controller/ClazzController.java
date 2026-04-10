@@ -19,12 +19,12 @@ public class ClazzController {
     /**
      * 查询所有班级信息
      */
-    /*@GetMapping
+    @GetMapping("list")
     public Result list() {
         log.info("查询所有班级数据");
         List<Clazz> clazzList = clazzService.findAll();
         return Result.success(clazzList);
-    }*/
+    }
 
     /**
      * 分页查询
@@ -39,10 +39,40 @@ public class ClazzController {
     /**
      * 添加班级信息
      */
-    @PostMapping("/clazzs")
+    @PostMapping
     public Result add(@RequestBody Clazz clazz) {
         log.info("添加班级数据: {}", clazz);
         clazzService.add(clazz);
+        return Result.success();
+    }
+
+    /**
+     * 根据ID查询班级信息
+     */
+    @GetMapping("/{id}")
+    public Result getInfo(@PathVariable Integer id){
+        log.info("根据ID查询班级信息：{}", id);
+        Clazz clazz = clazzService.getInfo(id);
+        return Result.success(clazz);
+    }
+
+    /**
+     * 修改班级信息
+     */
+    @PutMapping
+    public Result update(@RequestBody Clazz clazz){
+        log.info("修改班级信息：{}", clazz);
+        clazzService.update(clazz);
+        return Result.success();
+    }
+
+    /**
+     * 删除班级信息
+     */
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Integer id){
+        log.info("删除班级信息：{}", id);
+        clazzService.delete(id);
         return Result.success();
     }
 

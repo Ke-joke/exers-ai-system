@@ -45,4 +45,10 @@ public interface LocationMapper {
      */
     @Update("update location set name = #{name}, update_time = #{updateTime} where id = #{id}")
     void update(Location location);
+
+    /**
+     * 根据地址id查询员工数量
+     */
+    @Select("select count(1) from emp where location_id = #{id}")
+    int countEmpByLocationId(Integer id);
 }

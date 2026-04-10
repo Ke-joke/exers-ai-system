@@ -29,4 +29,16 @@ public class GlobalExceptionHandler {
         return Result.error("【" + arr[2] + "】已存在");
     }
 
+    @ExceptionHandler
+    public Result handleHaveStudentsException(HaveStudentsException e) {
+        log.error("程序出错啦~", e);
+        return Result.error(e.getMessage());
+    }
+
+    @ExceptionHandler
+    public Result handleHaveStudentsException(HaveEmpInLocationException e) {
+        log.error("程序出错啦~", e);
+        return Result.error(e.getMessage());
+    }
+
 }

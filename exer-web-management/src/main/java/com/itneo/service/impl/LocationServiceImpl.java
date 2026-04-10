@@ -1,10 +1,12 @@
 package com.itneo.service.impl;
 
+import com.itneo.exception.HaveEmpInLocationException;
 import com.itneo.mapper.LocationMapper;
 import com.itneo.pojo.Location;
 import com.itneo.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,8 +22,14 @@ public class LocationServiceImpl implements LocationService {
         return locationMapper.findAll();
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleteById(Integer id) {
+        // 1.如果删除的班级下有员工，则不能删除
+        if (locationMapper.countEmpByLocationId(id) > 0) {
+            throw new HaveEmpInLocationException("对不起，当前部门下有员工，不能直接删除！");
+        }
+        // 2.删除班级信息
         locationMapper.deleteById(id);
     }
 
