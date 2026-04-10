@@ -7,6 +7,8 @@ import com.itneo.mapper.EmpMapper;
 import com.itneo.pojo.*;
 import com.itneo.service.EmpLogService;
 import com.itneo.service.EmpService;
+import com.itneo.utils.JwtUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,8 +16,11 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@Slf4j
 @Service
 public class EmpServiceImpl implements EmpService {
 
@@ -45,6 +50,27 @@ public class EmpServiceImpl implements EmpService {
         //3. 封住结果 PageResult
         return new PageResult<Emp>(total, empList);
     }*/
+
+    @Override
+    public LoginInfo login(Emp emp) {
+        // 1.调用mapper接口，根据用户名和密码查询员工信息
+        Emp empLogin = empMapper.getUsernameAndPassword(emp);
+
+        // 2. 判断：判断是否存在这个员工，如果存在，组装登录信息，并返回
+        if(empLogin != null){
+            log.info("登录成功，员工信息：{}", empLogin);
+            //生成JWT令牌
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", empLogin.getId());
+            claims.put("username", empLogin.getUsername());
+            String jwt = JwtUtils.generateToken(claims);
+            LoginInfo loginInfo = new LoginInfo(empLogin.getId(), empLogin.getUsername(), empLogin.getName(), jwt);
+            return loginInfo;
+        }
+
+        // 3. 不存在，登录失败，返回null
+        return null;
+    }
 
     /**
      * PageHelper分页查询
