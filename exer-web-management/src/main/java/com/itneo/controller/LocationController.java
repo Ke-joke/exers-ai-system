@@ -1,5 +1,6 @@
 package com.itneo.controller;
 
+import com.itneo.anno.Log;
 import com.itneo.pojo.Location;
 import com.itneo.pojo.Result;
 import com.itneo.service.LocationService;
@@ -58,6 +59,7 @@ public class LocationController {
     /**
      * 删除地址 方式三：省略@RequestParam（前端传递的请求参数名与服务端方法参数名一致）
      */
+    @Log
     @DeleteMapping
     public Result delete(Integer id) {
         // System.out.println("根据ID删除地址：" + id);
@@ -69,6 +71,7 @@ public class LocationController {
     /**
      * 新增地址
      */
+    @Log
     @PostMapping
     public Result add(@RequestBody Location location) {
         // System.out.println("新增地址：" + location);
@@ -100,6 +103,7 @@ public class LocationController {
     /**
      * 修改地址
      */
+    @Log
     @PutMapping
     public Result update(@RequestBody Location location) {
         // System.out.println("修改地址：" + location);

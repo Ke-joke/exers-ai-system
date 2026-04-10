@@ -1,6 +1,8 @@
 package com.itneo.filter;
 
+import com.itneo.utils.CurrentHolder;
 import com.itneo.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,7 +41,10 @@ public class TokenFilter implements Filter {
 
         // 5.如果token存在，校验token，如果校验失败，返回错误信息(响应码401)
         try {
-            JwtUtils.parseToken(token);
+            Claims claims =  JwtUtils.parseToken(token);
+            Integer empId = Integer.valueOf(claims.get("id").toString());
+            CurrentHolder.setCurrentId(empId); // 将当前用户id存入ThreadLocal
+            log.info("当前用户id为：{}，将其存入ThreadLocal", empId);
         } catch (Exception e) {
             log.info("令牌非法，响应401");
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -49,6 +54,9 @@ public class TokenFilter implements Filter {
         // 6.如果token存在，校验成功，放行
         log.info("令牌合法，放行");
         chain.doFilter(req, resp);
+
+        // 7.清空ThreadLocal
+        CurrentHolder.remove();
 
     }
 }
