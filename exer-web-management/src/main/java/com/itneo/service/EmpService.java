@@ -2,6 +2,7 @@ package com.itneo.service;
 
 import com.itneo.pojo.Emp;
 import com.itneo.pojo.EmpQueryParam;
+import com.itneo.pojo.LoginInfo;
 import com.itneo.pojo.PageResult;
 
 import java.time.LocalDate;
@@ -38,6 +39,11 @@ public interface EmpService {
      * 查询所有员工
      */
     List<Emp> findAll();
+
+    /**
+     * 员工登录
+     */
+    LoginInfo login(Emp emp);
 
     /**
      * 分页查询

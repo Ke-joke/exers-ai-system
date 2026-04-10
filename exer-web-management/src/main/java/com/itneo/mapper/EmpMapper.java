@@ -78,4 +78,10 @@ public interface EmpMapper {
     @Select("select id, username, password, name, gender, phone, exer_type job, burn_calorie salary, " +
             "image, entry_date, location_id, create_time, update_time from emp")
     List<Emp> findAll();
+
+    /**
+     * 根据用户名和密码查询员工信息
+     */
+    @Select("select * from emp where username = #{username} and password = #{password}")
+    Emp getUsernameAndPassword(Emp emp);
 }
