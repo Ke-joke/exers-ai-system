@@ -1,5 +1,6 @@
 package com.itneo.controller;
 
+import com.itneo.anno.Log;
 import com.itneo.pojo.Emp;
 import com.itneo.pojo.EmpQueryParam;
 import com.itneo.pojo.PageResult;
@@ -62,6 +63,7 @@ public class EmpController {
     /**
      * 新增员工
      */
+    @Log
     @PostMapping
     public Result save(@RequestBody Emp emp) {
         log.info("新增员工：{}", emp);
@@ -81,6 +83,7 @@ public class EmpController {
     /**
      * 批量删除员工 - List
      */
+    @Log
     @DeleteMapping
     public Result delete(@RequestParam List<Integer> ids) {
         log.info("批量删除员工：ids={}", ids);
@@ -101,6 +104,7 @@ public class EmpController {
     /**
      * 修改员工信息
      */
+    @Log
     @PutMapping
     public Result update(@RequestBody Emp emp){
         log.info("修改员工信息：{}", emp);
