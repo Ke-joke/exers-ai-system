@@ -1,3 +1,10 @@
+-- 创建员工日志表
+create table emp_log(
+                        id int unsigned primary key auto_increment comment 'ID, 主键',
+                        operate_time datetime comment '操作时间',
+                        info varchar(2000) comment '日志信息'
+) comment '员工日志表';
+
 create table clazz(
                       id   int unsigned primary key auto_increment comment 'ID,主键',
                       name  varchar(30) not null unique  comment '班级名称',
@@ -71,3 +78,15 @@ create table operate_log(
                             return_value varchar(2000) comment '返回值, 存储json格式',
                             cost_time int comment '方法执行耗时, 单位:ms'
 ) comment '操作日志表';
+
+
+-- 登录日志表
+create table emp_login_log(
+                              id int unsigned primary key auto_increment comment 'ID',
+                              username varchar(20) comment '用户名',
+                              password varchar(32) comment '密码',
+                              login_time datetime comment '登录时间',
+                              is_success tinyint unsigned comment '是否成功, 1:成功, 0:失败',
+                              jwt varchar(1000) comment 'JWT令牌',
+                              cost_time bigint unsigned comment '耗时, 单位:ms'
+) comment '登录日志表';
