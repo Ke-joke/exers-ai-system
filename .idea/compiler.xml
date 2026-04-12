@@ -9,7 +9,7 @@
         <module name="exer-pojo" />
         <module name="exer-utils" />
       </profile>
-      <profile name="Annotation profile for exer-web-management" enabled="true">
+      <profile name="Annotation profile for exer-parent" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
