@@ -42,7 +42,7 @@ public interface EmpMapper {
      */
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into emp(username, name, gender, phone, exer_type, burn_calorie, image, entry_date, location_id, create_time, update_time)" +
-            "VALUES (#{username}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})")
+            "VALUES (#{username}, #{name}, #{gender}, #{phone}, #{exerType}, #{burnCalorie}, #{image}, #{entryDate}, #{locationId}, #{createTime}, #{updateTime})")
     void insert(Emp emp);
 
     /**

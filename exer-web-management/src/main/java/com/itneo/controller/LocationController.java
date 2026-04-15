@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@RequestMapping("/depts")
+@RequestMapping("/locations")
 @RestController
 public class LocationController {
 
