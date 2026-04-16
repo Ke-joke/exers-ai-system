@@ -13,11 +13,11 @@
                 <if test="name != null and name != ''">name = #{name},</if>
                 <if test="gender != null">gender = #{gender},</if>
                 <if test="phone != null and phone != ''">phone = #{phone},</if>
-                <if test="job != null">exer_type = #{job},</if>
-                <if test="salary != null">burn_calorie = #{salary},</if>
+                <if test="exerType != null">exer_type = #{exerType},</if>
+                <if test="burnCalorie != null">burn_calorie = #{burnCalorie},</if>
                 <if test="image != null and image != ''">image = #{image},</if>
                 <if test="entryDate != null">entry_date = #{entryDate},</if>
-                <if test="deptId != null">location_id = #{deptId},</if>
+                <if test="locationId != null">location_id = #{locationId},</if>
                 <if test="updateTime != null">update_time = #{updateTime},</if>
             </set>
             WHERE id = #{id}
