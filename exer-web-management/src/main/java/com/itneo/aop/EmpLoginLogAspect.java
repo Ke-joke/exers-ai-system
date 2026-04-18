@@ -20,7 +20,7 @@ import java.util.Arrays;
  */
 @Slf4j
 @Aspect
-//@Component
+@Component
 public class EmpLoginLogAspect {
 
     @Autowired

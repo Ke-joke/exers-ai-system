@@ -75,7 +75,7 @@ public interface EmpMapper {
     /**
      * 查询所有员工信息
      */
-    @Select("select id, username, password, name, gender, phone, exer_type job, burn_calorie salary, " +
+    @Select("select id, username, password, name, gender, phone, exer_type, burn_calorie, " +
             "image, entry_date, location_id, create_time, update_time from emp")
     List<Emp> findAll();
 
