@@ -3,10 +3,12 @@ spring:
     name: exer-web-management
   # mysql连接配置
   datasource:
-    url: jdbc:mysql://localhost:3306/exer
+    # url: jdbc:mysql://localhost:3306/exer
+    url: jdbc:mysql://mysql:3306/exer
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 990112
+    # password: 990112
+    password: 123
   servlet:
     multipart:
       # 最大单个文件大小
